@@ -7,14 +7,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-/data/*
-
+.venv/
 /ollama/*
 !/ollama/docker-compose.yml
-!/ollama/models
-/ollama/models/*
-!/ollama/models/def_*.txt
-!/ollama/models/modelfile_codenames.txt
+!/ollama/modelfiles
+/ollama/modelfiles/*
+!/ollama/modelfiles/def_*.txt
+!/ollama/modelfiles/modelfile_codenames.txt
 
 # C extensions
 *.so
