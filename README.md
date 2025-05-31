@@ -105,7 +105,7 @@ Run `/exps/baseline_cbr.ipynb`
 
 This will generate a .csv file within `/exps/results/` with the experiments results. The file name begins with the prefix `cbr_embeddings`, and the rest of the name depends on the parametrization of the experiment; check the notebook.
 
-## Tests with LLMs:
+## Testing with LLMs:
 
 A Ollama instance with the appropriate models need to be running in `http://localhost:11434` for the experiments to run properly.
 
