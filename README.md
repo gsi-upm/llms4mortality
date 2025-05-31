@@ -1,7 +1,7 @@
 # Environment
 :exclamation: Use a base Python version **3.12.10** :exclamation:
 
-Run `pip install requirements.txt` from a terminal in root to set up the required packages.
+Run `pip install requirements_min.txt` from a terminal in root to set up the required packages. You can also use the full requirements file (`requirements.txt`) to get a carbon copy of the environment used for the experiments.
 
 ## Preparing Ollama
 
