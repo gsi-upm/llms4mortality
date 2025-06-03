@@ -5,7 +5,7 @@ Run `pip install requirements_min.txt` from a terminal in root to set up the req
 
 ## Preparing Ollama
 
-The application is supported by a dockerized image of Ollama with some custom model definitions from the modelfiles provided in this repo. To set the Ollama environment up follow:
+The application is supported by a dockerized image of Ollama. To set the Ollama environment up follow:
 
 1. Install docker-compose cli in your host. Check https://docs.docker.com/compose/install/ for further information on how to install Docker in your specific system. The environment used for the development of this application relied on version **2.36.0**
 
@@ -15,22 +15,11 @@ The application is supported by a dockerized image of Ollama with some custom mo
 
 3. Run `docker-compose exec -it ollama bash` from your terminal to get to the ollama bash.
 
-Every model used in the attached experiments is located in `/ollama/modelfiles/` as separate modelfiles with the following naming scheme: `def_ll3_{model_input_id}_{model_output_id}.txt`, where `{model_input_id}` relates to the type of instructions provided to the LLM regarding to the prompt input, while `{model_output_id}` is the same but for the expected output from the model. These are:
+4. Make available the following base models in your environment:
 
-> model_input_id:
-> - R: Raw text annotations
-> - R: Summarized annotations
-> - RC: Raw text annotations with additional patient data
->
-> model_output_id
-> - M: Mortality outcome
-> - PM: Prognosis and mortality outcome
+> - LLaMA3 (Q4_0)
 
-Additionally, the model described in `def_ll3_summarizer.txt` is used to generate summaries out of text reports and save them to disk for further use.
-
-The modelfiles in `ollama/modelfiles/` will be available in your ollama instance in `/root/.ollama/modelfiles/` You have to create these models in your ollama instance before running the application. To do so, run `ollama create {name} -f {path}` from ollama bash, where `{name}` should be the same as the modelfile excluding the `def_` prefix and the extension. E.g:
-
-`ollama create ll3_summarizer -f /root/.ollama/modelfiles/def_ll3_summarizer.txt`
+5. Leave the instance running while you are executing your testing.
 
 ---
 
@@ -107,9 +96,19 @@ This will generate a .csv file within `/exps/results/` with the experiments resu
 
 ## Testing with LLMs:
 
-A Ollama instance with the appropriate models need to be running in `http://localhost:11434` for the experiments to work properly.
+A Ollama instance with the appropriate models preloaded needs to be running in `http://localhost:11434` for the experiments to work properly.
 
-Evaluation of experiments with LLMs work a little bit different than those of the baselines. Since some of these models do generate extra data in addition to the mortality prediction (such as the patient prognosis), we keep this output as separate .csv files in `/exps/results/llms/`, in subdirectories for each separate strategy. After you have succesfully executed the notebooks for each separate experiment you can run `exps/llms_eval.ipynb` to get a summarization of the results with different metrics.
+Evaluating the experiments with LLMs work a little bit different than those of the baselines. Since some of these models do generate extra data in addition to the mortality prediction (such as the patient prognosis), we keep this output as separate .csv files in `/exps/results/llms/`, in subdirectories for each separate approach. After you have succesfully executed the notebooks for each separate experiment you can run `exps/llms_eval.ipynb` to get a summarization of all the results with different metrics.
+
+#### A note on system prompts
+
+Every system prompt used during the experiments is located in `/ollama/sysprompts` as separate JSON files. There are three separate files with distinct prompts:
+
+> - **sysprompt_in**: Collection of prompts with different instructions for the expected input.
+> - **sysprompt_out**: Collection of prompts with different instructions for the expected output.
+> - **sysprompt_summarizer**: Single prompt used for summarization.
+
+You can tinker with the prompts, [but](#A-note-about-default-configurations-and-model-customization).
 
 #### <ins>Simple LLaMA3</ins>
 
@@ -122,4 +121,3 @@ Run `/exps/llm_cot1nn.ipynb`. This will instantiate a CBR model and precompute t
 #### <ins>Chain-of-Thought approach: 1NN</ins>
 
 Run `/exps/llm_cot1p1nn.ipynb`. This will instantiate two separate CBR models (one for cases of dead patients, and another one for cases of patients who survived), and precompute the neighbours for each of the test entries before firing the LLM. The notebook will generate a results .csv in `/exps/results/llms/cot1p1`.
-

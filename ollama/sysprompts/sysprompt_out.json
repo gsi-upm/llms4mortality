@@ -1,0 +1,42 @@
+{
+  "M": {
+    "name": "Mortality",
+    "prompt": "Response must be formatted as JSON, and must only contain the property \u201cDIES\u201d, which must consist only of a single word based on the most likely prognosis of the patient based on the provided data: \u201cYES\u201d if the patient dies within 30 days from discharge, or \u201cNO\u201d otherwise.",
+    "format": {
+      "type": "object",
+      "properties": {
+        "DIES": {
+          "enum": [
+            "YES",
+            "NO"
+          ]
+        }
+      },
+      "required": [
+        "DIES"
+      ]
+    }
+  },
+  "PM": {
+    "name": "Prognosis + mortality",
+    "prompt": "Response must be formatted as JSON, and must only contain the following two properties: \u201cPROGNOSIS\u201d and \u201cDIES\u201d. \u201cPROGNOSIS\u201d must include a brief summary of the most likely patient course based on the provided data. \u201cDIES\u201d property must consist only of a single word based on the prognosis of the patient: \u201cYES\u201d if the patient dies within 30 days from discharge, or \u201cNO\u201d otherwise.",
+    "format": {
+      "type": "object",
+      "properties": {
+        "PROGNOSIS": {
+          "type": "string"
+        },
+        "DIES": {
+          "enum": [
+            "YES",
+            "NO"
+          ]
+        }
+      },
+      "required": [
+        "PROGNOSIS",
+        "DIES"
+      ]
+    }
+  }
+}
