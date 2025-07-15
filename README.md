@@ -18,6 +18,8 @@ The application is supported by a dockerized image of Ollama. To set the Ollama 
 4. Make available the following base models in your environment:
 
 > - LLaMA3 (Q4_0)
+> - Med42-Llama3 8B (Q8_0): https://huggingface.co/QuantFactory/Llama3-Med42-8B-GGUF
+> - MedGemma 4B (Q8_0): https://huggingface.co/DevQuasar/google.medgemma-4b-it-GGUF
 
 5. Leave the instance running while you are executing your testing.
 
@@ -61,6 +63,10 @@ You are also advised to precompute the relevant text summaries beforehand to run
 Run `/tools/summarizer.ipynb` to generate text summaries from the original annotations using Ollama. You can tinker with the notebook to edit parameters regarding the model used for summarization, the text annotations that will be summarized and other additional data parameters. Take a look ([but](#A-note-about-default-configurations-and-model-customization))!
 
 This will generate separate csv files with the precomputed summaries in `data/mimiciv/summaries`. The file name starts with `summary_` as prefix, and the rest of the name depends on the summary options selected in the notebook. For example, the summary file for the default configuration is named: `summary_S5000_balanced_ll3_mc22000.csv`. Check the notebook for further info about the codes.
+
+## Precomputed Medical Course
+
+Similarly to text summaries, you're also adivsed to precompute the projected medical course from the instances. These are used in some of the CoT experiments. To do so, make sure you are running an instance of Ollama, then run `/tools/parse_course.ipynb`. This will generate separate csv files with the precomputed medical course in `data/mimiciv/precomputed_course`. Naming scheme follows the same principles as in text summaries.
 
 ## Embeddings from text annotations
 
@@ -107,17 +113,18 @@ Every system prompt used during the experiments is located in `/ollama/sysprompt
 > - **sysprompt_in**: Collection of prompts with different instructions for the expected input.
 > - **sysprompt_out**: Collection of prompts with different instructions for the expected output.
 > - **sysprompt_summarizer**: Single prompt used for summarization.
+> - **sysprompt_course**: Single prompt used for precomputing prognosis.
 
 You can tinker with the prompts, [but](#A-note-about-default-configurations-and-model-customization).
 
-#### <ins>Simple LLaMA3</ins>
+#### <ins>Simple LLMs</ins>
 
-Run `/exps/llm_simple.ipynb`. By default, this will execute multiple tests with different configurations for the input and output type prompted to the model. Each test will generate a separate .csv in `/exps/results/llms/simple` with the relevant model outputs.
+Run `/exps/llm_simple.ipynb`. By default, this will execute multiple tests with different configurations for all the base models considered. Each test will generate a separate .csv in `/exps/results/llms/simple` with the relevant model outputs for each of the predefined prompt instructions.
 
 #### <ins>Chain-of-Thought approach: 1NN</ins>
 
 Run `/exps/llm_cot1nn.ipynb`. This will instantiate a CBR model and precompute the neighbours for each of the test entries before firing the LLM. The notebook will generate a results .csv in `/exps/results/llms/cot1nn`.
 
-#### <ins>Chain-of-Thought approach: 1NN</ins>
+#### <ins>Chain-of-Thought approach: 1+1NN</ins>
 
 Run `/exps/llm_cot1p1nn.ipynb`. This will instantiate two separate CBR models (one for cases of dead patients, and another one for cases of patients who survived), and precompute the neighbours for each of the test entries before firing the LLM. The notebook will generate a results .csv in `/exps/results/llms/cot1p1`.
