@@ -27,7 +27,7 @@ The application is supported by a dockerized image of Ollama. To set the Ollama 
 
 ---
 
-# A note about default configurations and model customization
+# Disclaimer about default configurations and model customization
 
 Some scripts and notebooks in this project allow additional customization by changing some relevant parameters that are (usually) explained at the beginning of the file. However, be mindful you will probably have to adapt other notebooks or scripts accordignly for your specific configurations to work properly across experiments.
 
@@ -64,7 +64,7 @@ You are also advised to precompute the relevant text summaries beforehand to run
 
 Run `/tools/summarizer.ipynb` to generate text summaries from the original annotations using Ollama. You can tinker with the notebook to edit parameters regarding the model used for summarization, the text annotations that will be summarized and other additional data parameters. Take a look ([but](#A-note-about-default-configurations-and-model-customization))!
 
-This will generate separate csv files with the precomputed summaries in `data/mimiciv/summaries`. The file name starts with `summary_` as prefix, and the rest of the name depends on the summary options selected in the notebook. For example, the summary file for the default configuration is named: `summary_S5000_balanced_ll3_mc22000.csv`. Check the notebook for further info about the codes.
+This will generate separate csv files with the precomputed summaries in `data/mimiciv/summaries`. The file name starts with `summary_` as prefix, and the rest of the name depends on the summary options selected in the notebook. For example, the summary file for the default configuration is named: `summary_S5000_balanced_llama3_mc22000.csv`. Check the notebook for further info about the codes.
 
 ## Precomputed Medical Course
 
