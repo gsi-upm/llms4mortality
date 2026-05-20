@@ -1,13 +1,15 @@
 # Environment
 :exclamation: Use Python **v.3.12.10** :exclamation:
 
-Run `pip install requirements_min.txt` from a terminal in root to set up the required packages. You can also use the full requirements file (`requirements.txt`) to get a carbon copy of the pipi environment used for the experiments.
+Run `pip install -r requirements_min.txt` from a terminal in root to set up the required packages. You can also use the full requirements file (`requirements.txt`) to get a carbon copy of the pip environment used for the experiments.
+
+(Pip version: 25.0.1)
 
 ## Preparing Ollama
 
 The application is supported by a dockerized image of Ollama. To set the Ollama environment up follow:
 
-1. Install docker-compose cli in your host. Check https://docs.docker.com/compose/install/ for further information on how to install Docker in your specific system. The environment used for the development of this application relied on version **2.36.0**
+1. Install docker-compose cli in your host. Check <a href="https://docs.docker.com/compose/install/" target="_blank">Docker documentation</a> for further information on how to install Docker in your specific system. The environment used for the development of this application relied on version **2.36.0**
 
 2. Navigate to `/ollama` and run `docker-compose up -d` from a terminal in your environment to prepare the image.
 
@@ -33,10 +35,10 @@ Some scripts and notebooks in this project allow additional customization by cha
 
 # Data: MIMIC-IV
 
-This project relies on medical reports and patient data from the MIMIC-IV (Medical Information Mart for Intensive Care) database. First you need to obtain access to the MIMIC-IV database through Physionet: https://physionet.org/content/mimiciv/2.2/
+This project relies on medical reports and patient data from the MIMIC-IV (Medical Information Mart for Intensive Care) database. First you need to obtain access to the MIMIC-IV database through <a href="https://physionet.org/content/mimiciv/2.2/" target="_blank">Physionet</a>.
 
 We use the **2.2** version of MIMIC-IV, so make sure to download the right one!
-Download the following tables and place them in /data/mimiciv:
+Download the following tables from the "hosp" subfolder and place them in /data/mimiciv:
 
 >- drgcodes.csv.gz
 >- patients.csv.gz
