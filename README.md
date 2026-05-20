@@ -17,7 +17,7 @@ The application is supported by a dockerized image of Ollama. To set the Ollama 
 
 3. Run `docker-compose exec -it ollama bash` from your terminal to get to the ollama bash.
 
-4. Make available the following base models in your environment:
+4. Make available the following base models in your environment (`ollama pull [model ID or GGUF url]`):
 
 > - LLaMA3 (Q4_0)
 > - Med42-Llama3 8B (Q8_0): https://huggingface.co/QuantFactory/Llama3-Med42-8B-GGUF
