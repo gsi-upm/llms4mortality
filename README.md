@@ -20,8 +20,8 @@ The application is supported by a dockerized image of Ollama. To set the Ollama 
 4. Make available the following base models in your environment (`ollama pull [model ID or GGUF url]`):
 
 > - LLaMA3 (Q4_0)
-> - Med42-Llama3 8B (Q8_0): https://huggingface.co/QuantFactory/Llama3-Med42-8B-GGUF
-> - MedGemma 4B (Q8_0): https://huggingface.co/DevQuasar/google.medgemma-4b-it-GGUF
+> - Med42-Llama3 8B (Q8_0): <a href="https://huggingface.co/QuantFactory/Llama3-Med42-8B-GGUF">hf.co/QuantFactory/Llama3-Med42-8B-GGUF:Q8_0</a>
+> - MedGemma 4B (Q8_0): <a href="https://huggingface.co/DevQuasar/google.medgemma-4b-it-GGUF">hf.co/DevQuasar/google.medgemma-4b-it-GGUF:Q8_0</a>
 
 5. Leave the instance running while you are executing your testing.
 
