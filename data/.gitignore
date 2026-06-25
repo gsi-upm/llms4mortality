@@ -1,0 +1,7 @@
+# Ignore everything here...
+*
+# But myself! (and a few others :D)
+!.gitignore
+!incomplete_icd_immunosuppressed.json
+!full_icd_immunosuppressed.json
+!stay_id_splits.json
