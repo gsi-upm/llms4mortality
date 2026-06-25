@@ -5,9 +5,12 @@ from pathlib import Path
 import pandas as pd
 import argparse
 import json
+from sklearn.model_selection import train_test_split
 
 PATH_MIMICIV = ''
 FPATH_JSON_IMMUNO = ''
+
+SEED = 42
 
 # Lists of relevant ICD9 and 10 codes for immunosuppressed patients. Taken from supplementary material of reference study.
 ICD9_IMMUNO = []
@@ -93,10 +96,14 @@ if __name__ == '__main__':
     count_dropped = count_df - len(df_icu_immuno)
     print(f'> Dropped {count_dropped} entries from short stays. {len(df_icu_immuno)} entries remaining.')
 
-    # Randomize and generate sets (train, validation, test / 60, 20, 20)
-    # TODO
+    # Randomize and generate sets (train, test / 80, 20)
+    train_stay_ids, test_stay_ids = train_test_split(df_icu_immuno.stay_id.to_list(), test_size=0.2, random_state=SEED)
+    experiment_stay_ids = {
+        'train': train_stay_ids,
+        'test': test_stay_ids
+    }
 
-    # Export json with adhmission and stay IDs for each set
-    opath = FPATH_JSON_IMMUNO.parent / f'stays_{FPATH_JSON_IMMUNO.name}'
+    # Export json with admission and stay IDs for each set. These will be referenced later during experiments.
+    opath = FPATH_JSON_IMMUNO.parent / f'stay_id_splits.json'
     with open(opath, 'w') as f:
-        json.dump(df_icu_immuno.stay_id.to_list(), f)
+        json.dump(experiment_stay_ids, f)
